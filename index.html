@@ -153,8 +153,8 @@ html[data-lang=ar]{direction:rtl}
 .mn.open{display:flex}
 .mn a{color:var(--t2);text-decoration:none;font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;padding:10px 14px;border-radius:5px;transition:all .25s}
 .mn a:hover{color:var(--red);background:var(--bg3)}
-#hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
-.hbg{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,31,61,.75) 0%,rgba(12,31,61,.6) 45%,rgba(12,31,61,.92) 100%),url(./images/hero-offshore.jpg) center 30%/cover;animation:hz 18s ease-in-out infinite alternate}
+#hero{position:relative;min-height:100vh;min-height:100dvh;display:flex;align-items:center;overflow:hidden;background-color:#0c1f3d}
+.hbg{position:absolute;inset:0;background-color:#0c1f3d;background-image:linear-gradient(to bottom,rgba(12,31,61,.75) 0%,rgba(12,31,61,.6) 45%,rgba(12,31,61,.92) 100%),url(./images/hero-offshore.jpg);background-position:center 30%;background-size:cover;animation:hz 18s ease-in-out infinite alternate}
 @keyframes hz{0%{transform:scale(1.02)}100%{transform:scale(1.07)}}
 .hgr{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:64px 64px}
 .hc{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding:96px 24px 0;width:100%}
@@ -387,6 +387,8 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
   .sp{padding:44px 0}
   .w{padding:0 14px}
   .hc{padding-top:88px;padding-left:14px;padding-right:14px}
+  #hero{min-height:100svh;min-height:-webkit-fill-available}
+  .hbg{animation:none;background-attachment:scroll}
   /* Hero stats smaller */
   .hsn{font-size:1.5rem}
   .hst{padding:10px 18px 10px 0;margin-right:18px}
