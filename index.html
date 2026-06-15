@@ -1256,10 +1256,12 @@ async function submitForm(e) {
   const btn  = document.getElementById('submitBtn');
   btn.disabled = true;
   btn.textContent = '...';
+  const payload = Object.fromEntries(new FormData(form));
   try {
     const res  = await fetch('https://api.web3forms.com/submit', {
-      method : 'POST',
-      body   : new FormData(form)
+      method  : 'POST',
+      headers : { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body    : JSON.stringify(payload)
     });
     const data = await res.json();
     if (data.success) {
@@ -1274,7 +1276,7 @@ async function submitForm(e) {
     btn.disabled = false;
     btn.textContent = 'Send Enquiry';
     console.error('Form error:', err);
-    alert('Network error. Please try again or email us directly at contact@ocean-oil-libya.com');
+    alert('Network error — please email us directly: contact@ocean-oil-libya.com');
   }
 }
 
