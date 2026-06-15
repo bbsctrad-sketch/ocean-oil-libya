@@ -334,20 +334,28 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
   .mw-grid3{grid-template-columns:1fr 1fr}
 }
 @media(max-width:768px){
-  /* Nav */
+  /* Nav compact */
   .nlinks,.bo-nav{display:none!important}
   .hbgb{display:flex!important}
+  #nav{padding:0 14px}
+  .ni{height:56px}
+  .nli{width:34px;height:34px}
+  .nln{font-size:.74rem;letter-spacing:.04em}
+  .nls{font-size:.7rem;letter-spacing:.1em}
+  .lb{padding:4px 9px;font-size:.62rem}
+  .mn{top:56px}
   /* Layout */
-  .sp{padding:60px 0}
-  .w{padding:0 18px}
-  /* Hero — remove forced-height centering that causes white gap */
-  #hero{min-height:0;height:auto;align-items:flex-start}
+  .sp{padding:48px 0}
+  .w{padding:0 16px}
+  /* Hero */
+  #hero{min-height:0;height:auto;align-items:flex-start;overflow:hidden}
   .hbg{background-image:linear-gradient(to bottom,rgba(6,14,30,.92) 0%,rgba(6,14,30,.82) 45%,rgba(6,14,30,.97) 100%),url(./images/hero-offshore.jpg)}
-  .hc{padding-top:100px;padding-left:18px;padding-right:18px;padding-bottom:56px}
-  .hsts{overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px}
+  .hc{padding-top:92px;padding-left:16px;padding-right:16px;padding-bottom:44px}
+  /* Stats: horizontal scroll – no negative margins to avoid iOS Safari clip conflict */
+  .hsts{overflow-x:scroll;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none;padding-top:20px;padding-bottom:10px;border-top:1px solid rgba(255,255,255,.12)}
   .hsts::-webkit-scrollbar{display:none}
-  .hst{flex-shrink:0;padding:12px 24px 12px 0;margin-right:24px}
-  .hst:last-child{padding-right:18px;margin-top:0!important}
+  .hst{flex-shrink:0;padding:8px 20px 8px 0;margin-right:16px;border-right:1px solid rgba(255,255,255,.1)}
+  .hst:last-child{padding-right:0;margin-top:0!important;border-right:none;margin-right:0}
   /* Services */
   .sg{grid-template-columns:1fr}
   /* Projects */
@@ -373,15 +381,15 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
   /* Market Watch */
   .mw-kpi{grid-template-columns:repeat(2,1fr)}
   .mw-grid3{grid-template-columns:1fr}
-  /* Market ticker */
-  .mktk{height:60px}
-  .mktk-badge{padding:0 16px;font-size:.85rem;letter-spacing:.08em}
-  .mktk-badge::after{border-width:30px 0 30px 12px;right:-16px}
-  .mktk-item{padding:0 24px;height:60px}
-  .mktk-val{font-size:1.2rem}
-  .mktk-label{font-size:.8rem}
-  .mktk-unit{font-size:.75rem}
-  .mktk-chg{font-size:.8rem}
+  /* Market ticker — force contained, no overflow */
+  .mktk{height:52px;width:100%;max-width:100vw;overflow:hidden}
+  .mktk-badge{display:none}
+  .mktk-body{width:100%;overflow:hidden}
+  .mktk-item{padding:0 20px;height:52px}
+  .mktk-val{font-size:1.1rem}
+  .mktk-label{font-size:.75rem}
+  .mktk-unit{font-size:.7rem}
+  .mktk-chg{font-size:.76rem}
   /* Contact */
   .cgg{grid-template-columns:1fr}
   .fr2{grid-template-columns:1fr}
@@ -394,15 +402,19 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
 }
 @media(max-width:480px){
   /* Tighten spacing */
-  .sp{padding:44px 0}
+  .sp{padding:36px 0}
   .w{padding:0 14px}
   .aim{height:220px}
-  .hc{padding-top:88px;padding-left:14px;padding-right:14px;padding-bottom:44px}
-  #hero{min-height:0;height:auto;align-items:flex-start}
+  .hc{padding-top:84px;padding-left:14px;padding-right:14px;padding-bottom:36px}
+  #hero{min-height:0;height:auto;align-items:flex-start;overflow:hidden}
   .hbg{animation:none;background-attachment:scroll;background-image:linear-gradient(to bottom,rgba(6,14,30,.92) 0%,rgba(6,14,30,.82) 45%,rgba(6,14,30,.97) 100%),url(./images/hero-offshore.jpg)}
-  /* Hero stats smaller */
-  .hsn{font-size:1.5rem}
-  .hst{padding:10px 18px 10px 0;margin-right:18px}
+  /* Stats: 2-col grid at 390px, no horizontal scroll needed */
+  .hsts{display:grid!important;grid-template-columns:1fr 1fr;overflow-x:visible;flex-wrap:unset;margin-left:0;margin-right:0;padding-left:0;padding-right:0;padding-top:18px;gap:0}
+  .hst{padding:10px 8px;margin-right:0!important;border-right:none;border-bottom:1px solid rgba(255,255,255,.08);margin-top:0!important;flex-shrink:unset}
+  .hst:nth-child(odd){border-right:1px solid rgba(255,255,255,.08)}
+  .hst:last-child{grid-column:1 / -1;border-bottom:none;border-right:none;padding:10px 8px}
+  /* Stats numbers */
+  .hsn{font-size:1.4rem}
   /* CTA buttons */
   .bp,.bo{padding:11px 18px;font-size:.71rem;letter-spacing:.08em}
   .hct{gap:8px}
