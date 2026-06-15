@@ -105,7 +105,7 @@
 <style>
 :root{--bg:#ffffff;--bg2:#f4f7fb;--bg3:#edf1f7;--navy:#0c1f3d;--navy-d:#060e1e;--blue:#1a5eb8;--blue2:#2272d4;--red:#C23B22;--red-d:#9B2915;--tx:#0c1f3d;--t2:#4d6480;--t3:#8fa4ba;--bd:#d9e3ee;--bdh:#b8cde0;--r:2px;--rl:2px}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;line-height:1.7;overflow-x:hidden}
 html[data-lang=ar] body,html[data-lang=ar] *{font-family:Cairo,sans-serif}
 html[data-lang=ar]{direction:rtl}
@@ -340,12 +340,13 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
   /* Layout */
   .sp{padding:60px 0}
   .w{padding:0 18px}
-  /* Hero */
-  .hc{padding-top:100px;padding-left:18px;padding-right:18px}
+  /* Hero — remove forced-height centering that causes white gap */
+  #hero{min-height:0;height:auto;align-items:flex-start}
+  .hc{padding-top:100px;padding-left:18px;padding-right:18px;padding-bottom:56px}
   .hsts{overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px}
   .hsts::-webkit-scrollbar{display:none}
   .hst{flex-shrink:0;padding:12px 24px 12px 0;margin-right:24px}
-  .hst:last-child{padding-right:18px}
+  .hst:last-child{padding-right:18px;margin-top:0!important}
   /* Services */
   .sg{grid-template-columns:1fr}
   /* Projects */
@@ -353,6 +354,8 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
   .pcd2:first-child{grid-column:span 1}
   .pcd2:first-child .pim{height:220px}
   /* About */
+  .aim{height:280px}
+  .abd{right:-4px;bottom:-4px}
   .aps{grid-template-columns:1fr}
   /* CEO */
   .ceo-identity{flex-direction:column;text-align:center;align-items:center}
@@ -392,8 +395,9 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
   /* Tighten spacing */
   .sp{padding:44px 0}
   .w{padding:0 14px}
-  .hc{padding-top:88px;padding-left:14px;padding-right:14px}
-  #hero{min-height:100svh;min-height:-webkit-fill-available}
+  .aim{height:220px}
+  .hc{padding-top:88px;padding-left:14px;padding-right:14px;padding-bottom:44px}
+  #hero{min-height:0;height:auto;align-items:flex-start}
   .hbg{animation:none;background-attachment:scroll}
   /* Hero stats smaller */
   .hsn{font-size:1.5rem}
