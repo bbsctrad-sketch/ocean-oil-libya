@@ -1117,17 +1117,21 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
     <div class="cfm rv">
       <div class="cft" data-en="Send a Message" data-ar="إرسال رسالة">Send a Message</div>
       <div id="frmWrap">
-        <form onsubmit="submitForm(event)">
+        <form id="contactForm" onsubmit="submitForm(event)">
+          <input type="hidden" name="access_key" value="7157c496-a16b-41ff-921c-11e54c2d4567">
+          <input type="hidden" name="subject" value="New Enquiry — Ocean International Oil Services">
+          <input type="hidden" name="to" value="contact@ocean-oil-libya.com">
+          <input type="hidden" name="from_name" value="Ocean Oil Libya Website">
           <div class="fr2">
-            <div class="fg"><label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label><input type="text" data-en-ph="Your full name" data-ar-ph="اسمك الكامل" placeholder="Your full name" required/></div>
-            <div class="fg"><label data-en="Company" data-ar="الشركة">Company</label><input type="text" data-en-ph="Company name" data-ar-ph="اسم الشركة" placeholder="Company name" required/></div>
+            <div class="fg"><label data-en="Full Name" data-ar="الاسم الكامل">Full Name</label><input type="text" name="name" data-en-ph="Your full name" data-ar-ph="اسمك الكامل" placeholder="Your full name" required/></div>
+            <div class="fg"><label data-en="Company" data-ar="الشركة">Company</label><input type="text" name="company" data-en-ph="Company name" data-ar-ph="اسم الشركة" placeholder="Company name" required/></div>
           </div>
           <div class="fr2">
-            <div class="fg"><label data-en="Email" data-ar="البريد الإلكتروني">Email</label><input type="email" data-en-ph="your@email.com" data-ar-ph="بريدك@الإلكتروني.com" placeholder="your@email.com" required/></div>
-            <div class="fg"><label data-en="Phone" data-ar="الهاتف">Phone</label><input type="tel" data-en-ph="+218 XX XXX XXXX" data-ar-ph="+218 XX XXX XXXX" placeholder="+218 XX XXX XXXX"/></div>
+            <div class="fg"><label data-en="Email" data-ar="البريد الإلكتروني">Email</label><input type="email" name="email" data-en-ph="your@email.com" data-ar-ph="بريدك@الإلكتروني.com" placeholder="your@email.com" required/></div>
+            <div class="fg"><label data-en="Phone" data-ar="الهاتف">Phone</label><input type="tel" name="phone" data-en-ph="+218 XX XXX XXXX" data-ar-ph="+218 XX XXX XXXX" placeholder="+218 XX XXX XXXX"/></div>
           </div>
           <div class="fg"><label data-en="Subject" data-ar="الموضوع">Subject</label>
-            <select required>
+            <select name="enquiry_type" required>
               <option value="" data-en="Select enquiry type" data-ar="اختر نوع الاستفسار">Select enquiry type</option>
               <option data-en="Service Request" data-ar="طلب خدمة">Service Request</option>
               <option data-en="Tender / Prequalification" data-ar="مناقصة / تأهيل مسبق">Tender / Prequalification</option>
@@ -1135,8 +1139,8 @@ html[data-lang=ar] .fg input,html[data-lang=ar] .fg select,html[data-lang=ar] .f
               <option data-en="General Information" data-ar="معلومات عامة">General Information</option>
             </select>
           </div>
-          <div class="fg"><label data-en="Message" data-ar="الرسالة">Message</label><textarea data-en-ph="Describe your requirements, project scope, or inquiry..." data-ar-ph="اوصف متطلباتك أو نطاق مشروعك أو استفسارك..." placeholder="Describe your requirements, project scope, or inquiry..." required></textarea></div>
-          <button type="submit" class="bp" style="width:100%;justify-content:center;padding:14px" data-en="Send Enquiry" data-ar="إرسال الاستفسار">Send Enquiry</button>
+          <div class="fg"><label data-en="Message" data-ar="الرسالة">Message</label><textarea name="message" data-en-ph="Describe your requirements, project scope, or inquiry..." data-ar-ph="اوصف متطلباتك أو نطاق مشروعك أو استفسارك..." placeholder="Describe your requirements, project scope, or inquiry..." required></textarea></div>
+          <button type="submit" id="submitBtn" class="bp" style="width:100%;justify-content:center;padding:14px" data-en="Send Enquiry" data-ar="إرسال الاستفسار">Send Enquiry</button>
           <p style="font-size:.7rem;color:var(--t3);text-align:center;margin-top:10px" data-en="We respond to all enquiries within 24 business hours." data-ar="نرد على جميع الاستفسارات خلال 24 ساعة عمل.">We respond to all enquiries within 24 business hours.</p>
         </form>
       </div>
@@ -1246,10 +1250,31 @@ setTimeout(() => { document.querySelectorAll('.rv').forEach(el => el.classList.a
 
 
 // ── FORM SUBMIT ──────────────────────────────────────────────
-function submitForm(e) {
+async function submitForm(e) {
   e.preventDefault();
-  document.getElementById('frmWrap').querySelector('form').style.display = 'none';
-  document.getElementById('fsuc').classList.add('show');
+  const form = document.getElementById('contactForm');
+  const btn  = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '...';
+  try {
+    const res  = await fetch('https://api.web3forms.com/submit', {
+      method : 'POST',
+      body   : new FormData(form)
+    });
+    const data = await res.json();
+    if (data.success) {
+      form.style.display = 'none';
+      document.getElementById('fsuc').classList.add('show');
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Send Enquiry';
+      alert('Error: ' + (data.message || 'Please try again.'));
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Send Enquiry';
+    alert('Network error. Please try again or email us directly at contact@ocean-oil-libya.com');
+  }
 }
 
 // ── RESPONSIVE NAV BUTTON ────────────────────────────────────
